@@ -140,8 +140,8 @@ def asdict(model, exclude=None, exclude_underscore=None, exclude_pk=None,
                 else:
                     try:
                         rel_data.append(dict(child))
-                        # TypeError is for non-dictable children
-                    except TypeError:
+                        # TypeError/ValueError is for non-dictable children
+                    except (TypeError, ValueError):
                         rel_data.append(copy.copy(child))
 
         elif isinstance(rel, dict):
