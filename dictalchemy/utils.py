@@ -8,7 +8,7 @@ from __future__ import absolute_import, division
 
 import copy
 from sqlalchemy import inspect
-from sqlalchemy.ext.associationproxy import _AssociationList
+from sqlalchemy.ext.associationproxy import _AssociationList, _AssociationDict
 
 from sqlalchemy.orm.dynamic import AppenderMixin
 from sqlalchemy.orm.query import Query
@@ -144,7 +144,7 @@ def asdict(model, exclude=None, exclude_underscore=None, exclude_pk=None,
                     except TypeError:
                         rel_data.append(copy.copy(child))
 
-        elif isinstance(rel, dict):
+        elif isinstance(rel, (dict, _AssociationDict)):
             rel_data = {}
 
             for (child_key, child) in rel.iteritems():
